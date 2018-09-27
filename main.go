@@ -7,6 +7,7 @@ import (
 	"github.com/marni/goigc"
 	"log"
 	"net/http"
+	"os"
 	"regexp"
 	"strconv"
 	"strings"
@@ -191,8 +192,13 @@ func getTrackById(id int) (T Track, err error) {
 
 
 func main() {
-    http.HandleFunc("/igcinfo/api/", Index)
+	port := os.Getenv("PORT")
+	if port == "" {
+		log.Fatal("$PORT must be set")
+	}
+
+	http.HandleFunc("/igcinfo/api/", Index)
     http.HandleFunc("/igcinfo/api/igc", RegAndShowTrackIds)
 	http.HandleFunc("/igcinfo/api/igc/", ShowTrackInfo)
-    log.Fatal(http.ListenAndServe(":32123", nil))
+    log.Fatal(http.ListenAndServe( ":" + port, nil))
 }
