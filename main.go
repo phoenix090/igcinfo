@@ -1,24 +1,24 @@
 package main
 
 import (
-    "fmt"
-    "log"
-    "net/http"
-    "encoding/json"
-    //"regexp"
-    "github.com/marni/goigc"
-    "time"
-    //"strings"
-    //"io/ioutil"
+	"encoding/json"
+	"errors"
+	"fmt"
+	"github.com/marni/goigc"
+	"log"
+	"net/http"
+	"regexp"
+	"strconv"
+	"strings"
+	"time"
 )
- var start = time.Now()
-
-//var reg = regexp.MustCompile("^/igcinfo/api/([a-z- A-Z/]+)$")
+var id = 1
 var AllIds []TrackId         //Track ids
 var AllTracks []Track
+var start = time.Now()
 
 type TrackId struct {
-    Id string 
+    Id int
 }
 
 type URL struct {
@@ -32,12 +32,12 @@ type Information struct {
 }
 
 type Track struct {
-    ID string
-    H_date string //map, slice?
-    Pilot string // Struct?
+    ID int
+    HDate time.Time
+    Pilot string
     Glider string
-    Glider_id string
-    Track_length string
+    GliderId string
+    TrackLength float64
 }
 
 
@@ -46,7 +46,12 @@ type Track struct {
 */
 func Index(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-    if http.StatusOK == 200{
+	reg := regexp.MustCompile("^/igcinfo(/api/)*$")
+	parts := reg.FindStringSubmatch(r.URL.Path)
+	//fmt.Println(r.Response.StatusCode)
+    // bytt ut true med statusCode sjekk!
+
+    if parts != nil {
         if r.Method == "GET" {
             s := time.Now().Sub(start).Seconds()
             //fmt.Println(time.Now().UTC().Format(time.RFC3339))
@@ -59,7 +64,9 @@ func Index(w http.ResponseWriter, r *http.Request) {
         } else {
             http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
         }
-    }
+    } else {
+		http.NotFound(w, r)
+	}
     
 }
 
@@ -71,32 +78,37 @@ func Index(w http.ResponseWriter, r *http.Request) {
 func RegAndShowTrackIds(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Content-Type", "application/json; charset=UTF-8")
     //w.Header().Set("Access-Control-Allow-Origin", "*")
-    if http.StatusOK == 200 {
+
+    // bytt ut true med statusCode sjekk!
+	if true {
         if r.Method == "POST" {
         
             var url URL
             if err := json.NewDecoder(r.Body).Decode(&url); err != nil {
-                fmt.Fprintf(w,"The api only accepts raw json!") 
-                panic(err)
+				http.Error(w, "The api only accepts raw JSON", 404)
             }
 
             track, err := igc.ParseLocation(url.Url)
             if err != nil {
-                fmt.Errorf("Problem reading the track", err)
-                fmt.Fprintf(w, "Wrong url!")
-            } else { 
+            	http.Error(w, "Empty or wrong igc url provided", 404)
+            } else {
+				var trackLen float64
+				for i := 0; i < len(track.Points)-1; i++ {
+					trackLen += track.Points[i].Distance(track.Points[i+1])
+				}
                 AllTracks = append(AllTracks, Track { 
-                    ID : track.UniqueID, H_date : track.Date.String(),
+                    ID : id, HDate : track.Date,
                     Pilot : track.Pilot, Glider : track.GliderType,
-                    Glider_id : track.GliderID, Track_length : track.FlightRecorder,
+                    GliderId : track.GliderID, TrackLength : trackLen,
                 })
-                AllIds = append(AllIds, TrackId { Id : track.UniqueID })
+                AllIds = append(AllIds, TrackId { Id : id })
+                id++
                 json.NewEncoder(w).Encode(url)
             }
 
         } else if r.Method == "GET" {
             //fmt.Println("Status: ", http.statusCode)
-            s := make([]string, len(AllIds))
+            s := make([]int, len(AllIds))
             for index, ids := range AllIds {
                 s[index] = ids.Id
             }
@@ -106,7 +118,7 @@ func RegAndShowTrackIds(w http.ResponseWriter, r *http.Request) {
         }  
 
     } else {
-        fmt.Fprintf(w, "Something went wrong! Status: " + string(http.StatusOK))
+		http.Error(w, "Error!", http.StatusBadRequest)
     }
       
 }
@@ -116,18 +128,28 @@ func RegAndShowTrackIds(w http.ResponseWriter, r *http.Request) {
 */
 func ShowTrackInfo(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-    if http.StatusOK == 200{
+	var field string
+	path := strings.Split(r.URL.Path, "/")
+
+	id, conErr := strconv.Atoi(path[4])
+	fmt.Println(conErr)
+	if conErr != nil && (len(path) >= 4 && len(path) <= 5){
+		http.Error(w, "Error with the given ID, must be integer", 404)
+	}
+	if len(path) > 5 {
+		field = path[5]
+	}
+	// bytt ut true med statusCode sjekk!
+	if true {
         if r.Method == "GET" {
-            id := r.FormValue("id")
-            for _, track := range AllTracks {
-                if track.ID == id {
-                    json.NewEncoder(w).Encode(track)
-                    return
-                }
-            }
-            Err := make(map[string]string)
-            Err["Error"] = "The track with the id: " + id + " does not excist!"
-            json.NewEncoder(w).Encode(Err)
+        	track, err := getTrackById(id)
+        	if err == nil && field == "" {
+				json.NewEncoder(w).Encode(track)
+			} else if err == nil && field != "" {
+				ShowTrackField(w, r, track, field)
+			} else {
+				http.Error(w, "Did't find the track with id (" + path[4] + ")", 404)
+			}
         } else {
             http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
         }
@@ -135,13 +157,42 @@ func ShowTrackInfo(w http.ResponseWriter, r *http.Request) {
     
 }
 
+/*
+** Retrieves the track field, Accepts only GET
+*/
+func ShowTrackField(w http.ResponseWriter, r *http.Request, obj Track, field string){
+	w.Header().Set("Content-Type", "text/plain; charset=UTF-8")
 
+	switch field {
+	case "pilot":
+		json.NewEncoder(w).Encode(obj.Pilot)
+	case "glider":
+		json.NewEncoder(w).Encode(obj.Glider)
+	case "glider_id":
+		json.NewEncoder(w).Encode(obj.GliderId)
+	case "calculated total track length":
+		json.NewEncoder(w).Encode(obj.TrackLength)
+	case "H_date":
+		json.NewEncoder(w).Encode(obj.HDate)
+	default:
+		http.Error(w, "Could't find the field in the record", http.StatusNotFound)
+	}
+}
+
+// Returns a struct of Track that matches the param id.
+func getTrackById(id int) (T Track, err error) {
+	for _, T = range AllTracks {
+		if id == T.ID {
+			return T, nil
+		}
+	}
+	return T , errors.New("No track found")
+}
 
 
 func main() {
-    http.HandleFunc("/api/", Index)
-    http.HandleFunc("/api/igc", RegAndShowTrackIds)
-    http.HandleFunc("/api/igc/", ShowTrackInfo)
-
+    http.HandleFunc("/igcinfo/api/", Index)
+    http.HandleFunc("/igcinfo/api/igc", RegAndShowTrackIds)
+	http.HandleFunc("/igcinfo/api/igc/", ShowTrackInfo)
     log.Fatal(http.ListenAndServe(":32123", nil))
 }
