@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"github.com/marni/goigc"
 	"log"
 	"net/http"
@@ -75,7 +74,7 @@ func getUptime() (uptime string){
 */
 func Index(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	reg := regexp.MustCompile("^/igcinfoapi.herokuapp.com(/api/)*$")
+	reg := regexp.MustCompile("^/(api/)*$")
 	parts := reg.FindStringSubmatch(r.URL.Path)
 	uptime := getUptime()
 
@@ -157,13 +156,12 @@ func ShowTrackInfo(w http.ResponseWriter, r *http.Request) {
 	var field string
 	path := strings.Split(r.URL.Path, "/")
 
-	id, conErr := strconv.Atoi(path[4])
-	fmt.Println(conErr)
-	if conErr != nil && (len(path) >= 4 && len(path) <= 5){
+	id, conErr := strconv.Atoi(path[3])
+	if conErr != nil && (len(path) >= 3 && len(path) <= 5){
 		http.Error(w, "Error with the given ID, must be integer", 404)
 	}
-	if len(path) > 5 {
-		field = path[5]
+	if len(path) > 4 {
+		field = path[4]
 	}
 	// bytt ut true med statusCode sjekk!
 	if true {
@@ -174,7 +172,7 @@ func ShowTrackInfo(w http.ResponseWriter, r *http.Request) {
 			} else if err == nil && field != "" {
 				ShowTrackField(w, r, track, field)
 			} else {
-				http.Error(w, "Did't find the track with id (" + path[4] + ")", 404)
+				http.Error(w, "Did't find the track with id (" + path[3] + ")", 404)
 			}
         } else {
             http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
@@ -224,9 +222,9 @@ func main() {
 		port = "8080"
 	}
 
-	http.HandleFunc("/igcinfoapi.herokuapp.com/api/", Index)
-    http.HandleFunc("/igcinfoapi.herokuapp.com/api/igc", RegAndShowTrackIds)
-	http.HandleFunc("/igcinfoapi.herokuapp.com/api/igc/", ShowTrackInfo)
+	http.HandleFunc("/api/", Index)
+    http.HandleFunc("/api/igc", RegAndShowTrackIds)
+	http.HandleFunc("/api/igc/", ShowTrackInfo)
     err := http.ListenAndServe( ":" + port, nil)
 	log.Fatalf("Server error: %s", err)
 }
