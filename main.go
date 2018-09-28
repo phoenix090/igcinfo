@@ -16,6 +16,7 @@ import (
 var id = 1
 var AllIds []TrackId         //Track ids
 var AllTracks []Track
+var start time.Time
 
 type TrackId struct {
     Id int
@@ -41,20 +42,49 @@ type Track struct {
 }
 
 
+func getUptime() (uptime string){
+	now := time.Now()
+	newTime := now.Sub(start).String()
+	hours := int(now.Hour())
+	y, m, d := "0", "0", "0"
+	if hours > 23 && hours % 24 != 0 {
+		// Checking if the days are beneeth 10
+		d = strconv.Itoa(hours * 24 % 31)
+		if hours * 240 < 10 {
+			d = "0" + strconv.Itoa(hours * 24 % 31)
+		}
+	} else {
+
+	}
+	days, _ := strconv.Atoi(d)
+
+	if days > 31 {
+		m = strconv.Itoa(days * 31 % 31)
+	}
+	months, _ := strconv.Atoi(m)
+	if months > 12 {
+		y = strconv.Itoa(months * 12)
+	}
+	uptime = "P" + y + "Y" + m + "M" + d + "DT" + newTime
+
+	return uptime
+}
+
 /*
 ** Basepoint of the API- URI. Gives basic info about the API
 */
 func Index(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	reg := regexp.MustCompile("^/igcinfo(/api/)*$")
+	reg := regexp.MustCompile("^/igcinfoapi.herokuapp.com(/api/)*$")
 	parts := reg.FindStringSubmatch(r.URL.Path)
-	//fmt.Println(r.Response.StatusCode)
+	uptime := getUptime()
+
     // bytt ut true med statusCode sjekk!
 
     if parts != nil {
         if r.Method == "GET" {
             json.NewEncoder(w).Encode(Information { 
-                Uptime : "40", Info : "Service for IGC tracks.", Version: "version 1.0",
+                Uptime : uptime, Info : "Service for IGC tracks.", Version: "version 1.0",
             })
         } else {
             http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
@@ -96,9 +126,10 @@ func RegAndShowTrackIds(w http.ResponseWriter, r *http.Request) {
                     Pilot : track.Pilot, Glider : track.GliderType,
                     GliderId : track.GliderID, TrackLength : trackLen,
                 })
-                AllIds = append(AllIds, TrackId { Id : id })
+				newTrack := TrackId { Id : id }
+                AllIds = append(AllIds, newTrack)
                 id++
-                json.NewEncoder(w).Encode(url)
+                json.NewEncoder(w).Encode(newTrack)
             }
 
         } else if r.Method == "GET" {
@@ -187,14 +218,15 @@ func getTrackById(id int) (T Track, err error) {
 
 
 func main() {
+	start = time.Date(2018, time.September, 28, 17, 0, 0, 0, time.UTC)
 	port, ok := os.LookupEnv("PORT")
 	if !ok {
 		port = "8080"
 	}
 
-	http.HandleFunc("/igcinfo/api/", Index)
-    http.HandleFunc("/igcinfo/api/igc", RegAndShowTrackIds)
-	http.HandleFunc("/igcinfo/api/igc/", ShowTrackInfo)
+	http.HandleFunc("/igcinfoapi.herokuapp.com/api/", Index)
+    http.HandleFunc("/igcinfoapi.herokuapp.com/api/igc", RegAndShowTrackIds)
+	http.HandleFunc("/igcinfoapi.herokuapp.com/api/igc/", ShowTrackInfo)
     err := http.ListenAndServe( ":" + port, nil)
 	log.Fatalf("Server error: %s", err)
 }
