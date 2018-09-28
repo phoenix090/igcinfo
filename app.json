@@ -1,0 +1,12 @@
+
+{
+    "name": "igcinfo",
+    "description": "igc API",
+    "keywords": [
+        "go",
+        "heroku",
+        "template"
+    ],
+    "website": "https://github.com/phoenix090/igcinfo",
+    "repository": "https://github.com/phoenix090/igcinfo"
+}

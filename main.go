@@ -16,7 +16,6 @@ import (
 var id = 1
 var AllIds []TrackId         //Track ids
 var AllTracks []Track
-var start = time.Now()
 
 type TrackId struct {
     Id int
@@ -27,7 +26,7 @@ type URL struct {
 }
 
 type Information struct {
-    Uptime float64
+    Uptime string
     Info string
     Version string
 }
@@ -54,13 +53,8 @@ func Index(w http.ResponseWriter, r *http.Request) {
 
     if parts != nil {
         if r.Method == "GET" {
-            s := time.Now().Sub(start).Seconds()
-            //fmt.Println(time.Now().UTC().Format(time.RFC3339))
-            //elapsed := t.Sub(start)
-            //fmt.Printf("type: %T", elapsed)       //elapsed er float64
-            //fmt.Println("\nTime elapsed: ", elapsed)
             json.NewEncoder(w).Encode(Information { 
-                Uptime : s, Info : "Service for IGC tracks.", Version: "version 1.0", 
+                Uptime : "40", Info : "Service for IGC tracks.", Version: "version 1.0",
             })
         } else {
             http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
@@ -191,14 +185,16 @@ func getTrackById(id int) (T Track, err error) {
 }
 
 
+
 func main() {
-	port := os.Getenv("PORT")
-	if port == "" {
-		log.Fatal("$PORT must be set")
+	port, ok := os.LookupEnv("PORT")
+	if !ok {
+		port = "8080"
 	}
 
 	http.HandleFunc("/igcinfo/api/", Index)
     http.HandleFunc("/igcinfo/api/igc", RegAndShowTrackIds)
 	http.HandleFunc("/igcinfo/api/igc/", ShowTrackInfo)
-    log.Fatal(http.ListenAndServe( ":" + port, nil))
+    err := http.ListenAndServe( ":" + port, nil)
+	log.Fatalf("Server error: %s", err)
 }
