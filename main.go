@@ -166,10 +166,10 @@ func ShowTrackInfo(w http.ResponseWriter, r *http.Request) {
 	if conErr != nil {
 		http.Error(w, "Error with the given ID, must be integer!", http.StatusNotFound)
 	}
-	if len(path) < 3 || len(path) > 4 {
+	if len(path) < 3 || len(path) > 5 {
 		http.Error(w, "Not implimented yet", http.StatusNotImplemented)
 		return
-	} else if len(path) == 4 {
+	} else if len(path) == 5 {
 		field = path[4]
 	}
 
