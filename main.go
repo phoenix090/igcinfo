@@ -45,29 +45,33 @@ type Track struct {
 */
 func getUptime() (uptime string){
 	now := time.Now()
-	newTime := now.Sub(start).String()
-	hours := int(now.Hour())
-	
+	newTime := now.Sub(start)
+	hours := int(newTime.Hours())
+	sek:= strconv.Itoa(int(newTime.Seconds()) % 3600 % 100)
+	min := strconv.Itoa(int(newTime.Minutes()) % 60)
 	y, m, d := "0", "0", "0"
-	if hours > 23 && hours % 24 != 0 {
-		// Checking if the days are beneeth 10
-		d = strconv.Itoa(hours * 24 % 31)
-		if hours * 240 < 10 {
-			d = "0" + strconv.Itoa(hours * 24 % 31)
-		}
-	} else {
 
+	// Setting the days correct
+	if hours > 23 {
+		d = strconv.Itoa(hours / 24)
+		hours %= 24
 	}
 	days, _ := strconv.Atoi(d)
-
+	// Setting the month correct
 	if days > 31 {
-		m = strconv.Itoa(days * 31 % 31)
+		m = strconv.Itoa(days / 31)
+		d = strconv.Itoa(days % 31)
+
 	}
 	months, _ := strconv.Atoi(m)
+	// Setting the year correct
 	if months > 12 {
-		y = strconv.Itoa(months * 12)
+		y = strconv.Itoa(months / 12)
+		m = strconv.Itoa(months % 12)
 	}
-	uptime = "P" + y + "Y" + m + "M" + d + "DT" + newTime
+
+	hour := strconv.Itoa(hours)
+	uptime = "P" + y + "Y" + m + "M" + d + "DT" + hour + "H" + min + "M" + sek + "S"
 
 	return uptime
 }
@@ -158,14 +162,18 @@ func ShowTrackInfo(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	var field string
 	path := strings.Split(r.URL.Path, "/")
-
 	id, conErr := strconv.Atoi(path[3])
-	if conErr != nil && (len(path) >= 3 && len(path) <= 5){
-		http.Error(w, "Error with the given ID, must be integer", 404)
+	if conErr != nil {
+		http.Error(w, "Error with the given ID, must be integer!", http.StatusNotFound)
 	}
-	if len(path) > 4 {
+	if len(path) < 3 || len(path) > 4 {
+		http.Error(w, "Not implimented yet", http.StatusNotImplemented)
+		return
+	} else if len(path) == 4 {
 		field = path[4]
 	}
+
+
 	// bytt ut true med statusCode sjekk!
 	if true {
         if r.Method == "GET" {
