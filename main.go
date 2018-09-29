@@ -40,11 +40,14 @@ type Track struct {
     TrackLength float64
 }
 
-
+/*
+** Gets the uptime formated in ISO 8601
+*/
 func getUptime() (uptime string){
 	now := time.Now()
 	newTime := now.Sub(start).String()
 	hours := int(now.Hour())
+	
 	y, m, d := "0", "0", "0"
 	if hours > 23 && hours % 24 != 0 {
 		// Checking if the days are beneeth 10
