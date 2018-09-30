@@ -12,8 +12,10 @@ import (
 	"strings"
 	"time"
 )
+
+/*   Global vars   */
 var id = 1
-var AllIds []TrackId         //Track ids
+var AllIds []TrackId
 var AllTracks []Track
 var start time.Time
 
@@ -41,13 +43,13 @@ type Track struct {
 }
 
 /*
-** Gets the uptime formated in ISO 8601
+** getUptime updates uptime and formates it in ISO 8601 standard
 */
 func getUptime() (uptime string){
 	now := time.Now()
 	newTime := now.Sub(start)
 	hours := int(newTime.Hours())
-	sek:= strconv.Itoa(int(newTime.Seconds()) % 3600 % 100)
+	sek:= strconv.Itoa(int(newTime.Seconds()) % 36000 % 60)
 	min := strconv.Itoa(int(newTime.Minutes()) % 60)
 	y, m, d := "0", "0", "0"
 
@@ -116,7 +118,7 @@ func RegAndShowTrackIds(w http.ResponseWriter, r *http.Request) {
         
             var url URL
             if err := json.NewDecoder(r.Body).Decode(&url); err != nil {
-				http.Error(w, "The api only accepts raw JSON", 404)
+				http.Error(w, "The api only accepts JSON data", 404)
             }
 
             track, err := igc.ParseLocation(url.Url)
@@ -164,7 +166,8 @@ func ShowTrackInfo(w http.ResponseWriter, r *http.Request) {
 	path := strings.Split(r.URL.Path, "/")
 	id, conErr := strconv.Atoi(path[3])
 	if conErr != nil {
-		http.Error(w, "Error with the given ID, must be integer!", http.StatusNotFound)
+		http.Error(w, "Wrong or empty id provided!", http.StatusNotFound)
+		return
 	}
 	if len(path) < 3 || len(path) > 5 {
 		http.Error(w, "Not implimented yet", http.StatusNotImplemented)
@@ -210,7 +213,7 @@ func ShowTrackField(w http.ResponseWriter, r *http.Request, obj Track, field str
 	case "H_date":
 		json.NewEncoder(w).Encode(obj.HDate)
 	default:
-		http.Error(w, "Could't find the field in the record", http.StatusNotFound)
+		http.Error(w, "Wrong field provided", http.StatusNotFound)
 	}
 }
 
