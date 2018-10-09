@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/marni/goigc"
 	"igcinfo/model"
 	"log"
@@ -129,15 +130,15 @@ func ShowTrackField(w http.ResponseWriter, r *http.Request, obj model.Track, fie
 
 	switch field {
 	case "pilot":
-		json.NewEncoder(w).Encode(obj.Pilot)
+		fmt.Fprint(w, obj.Pilot)
 	case "glider":
-		json.NewEncoder(w).Encode(obj.Glider)
+		fmt.Fprint(w, obj.Glider)
 	case "glider_id":
-		json.NewEncoder(w).Encode(obj.GliderId)
+		fmt.Fprint(w, obj.GliderId)
 	case "calculated total track length":
-		json.NewEncoder(w).Encode(obj.TrackLength)
+		fmt.Fprint(w, obj.TrackLength)
 	case "H_date":
-		json.NewEncoder(w).Encode(obj.HDate)
+		fmt.Fprint(w, obj.HDate)
 	default:
 		http.Error(w, "Wrong field provided", http.StatusNotFound)
 	}

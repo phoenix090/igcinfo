@@ -83,7 +83,7 @@ func TestShowTrackInfo(t *testing.T) {
 Testing RegAndShowTrackIds
 */
 func TestRegAndShowTrackIds(t *testing.T) {
-	// Testing table containing slice of struct with all the diff scenerios
+	// Testing table containing slice of struct with all the diff scenarios
 	TestTable := []struct {
 		method        string
 		url           string
@@ -91,9 +91,7 @@ func TestRegAndShowTrackIds(t *testing.T) {
 		body          map[string]string
 	}{
 		{method: "GET", url: "localhost:8080/api/igc", expStatusCode: http.StatusOK},
-		//{ method : "GET", url : "localhost:8080/api/123", expStatusCode : http.StatusNotFound},
 		{method: "POST", url: "localhost:8080/api/igc", expStatusCode: http.StatusOK},
-		//{ method : "POST", url : "localhost:8080/api/123", expStatusCode: http.StatusNotFound},
 	}
 
 	for idx, testCase := range TestTable {
@@ -142,3 +140,11 @@ func TestRegAndShowTrackIds(t *testing.T) {
 		}
 	}
 }
+
+
+
+
+
+
+
+
