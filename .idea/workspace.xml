@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="508bf561-618d-4dae-9bb3-be07191bcb4e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/api/apiHandlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/apiHandlers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/main.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/main_test.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/inmem.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/inmem.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/vendor.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/vendor.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,25 +30,25 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="go" value="9" />
-          <entry key="json" value="4" />
+          <entry key="json" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Go" value="9" />
-          <entry key="JSON" value="4" />
+          <entry key="JSON" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="go" value="4806" />
-          <entry key="json" value="40" />
+          <entry key="json" value="41" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Go" value="4806" />
-          <entry key="JSON" value="40" />
+          <entry key="JSON" value="41" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.go.postfix.template.usages.trigger">
@@ -75,11 +72,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/apiHandlers.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="118" column="32" selection-start-line="118" selection-start-column="32" selection-end-line="118" selection-end-column="32" />
+            <state relative-caret-position="172">
+              <caret line="115" column="35" selection-start-line="115" selection-start-column="35" selection-end-line="115" selection-end-column="35" />
               <folding>
                 <element signature="e#13#152#0" expanded="true" />
               </folding>
@@ -95,6 +92,15 @@
               <folding>
                 <element signature="e#14#72#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/vendor/vendor.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -132,10 +138,10 @@
       <list>
         <option value="$PROJECT_DIR$/main.go" />
         <option value="$PROJECT_DIR$/main/main_test.go" />
-        <option value="$PROJECT_DIR$/vendor/vendor.json" />
         <option value="$PROJECT_DIR$/main/main.go" />
         <option value="$PROJECT_DIR$/model/inmem.go" />
         <option value="$PROJECT_DIR$/api/apiHandlers.go" />
+        <option value="$PROJECT_DIR$/vendor/vendor.json" />
       </list>
     </option>
   </component>
@@ -217,12 +223,15 @@
     <history-entry file="go_test_igcinfo_main_test - 2018.10.13 at 00h 53m 41s.xml">
       <configuration name="go test igcinfo/main_test" configurationId="GoTestRunConfiguration" />
     </history-entry>
+    <history-entry file="go_test_igcinfo_main_test - 2018.10.13 at 01h 13m 52s.xml">
+      <configuration name="go test igcinfo/main_test" configurationId="GoTestRunConfiguration" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="640" y="25" width="726" height="743" extended-state="4" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.0" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.32941177" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -236,7 +245,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="right" id="Coverage" side_tool="true" visible="true" weight="0.0" />
+      <window_info anchor="right" id="Coverage" side_tool="true" visible="true" weight="0.0" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -260,13 +269,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/vendor.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="44" column="30" selection-start-line="44" selection-start-column="30" selection-end-line="44" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/main.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -287,6 +289,16 @@
     <entry file="file://$PROJECT_DIR$/main_test/main_test.go">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/api/apiHandlers.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="115" column="35" selection-start-line="115" selection-start-column="35" selection-end-line="115" selection-end-column="35" />
+          <folding>
+            <element signature="e#13#152#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -297,13 +309,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/apiHandlers.go">
+    <entry file="file://$PROJECT_DIR$/vendor/vendor.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="118" column="32" selection-start-line="118" selection-start-column="32" selection-end-line="118" selection-end-column="32" />
-          <folding>
-            <element signature="e#13#152#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="30">
+          <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
         </state>
       </provider>
     </entry>

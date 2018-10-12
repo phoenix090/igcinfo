@@ -1,6 +1,6 @@
 {
 	"comment": "",
-	"ignore": "main_test.go",
+	"ignore": "igcinfo/main_test",
 	"package": [
 		{
 			"checksumSHA1": "EFaoU18lhtrjqhlADkSjJkUAWIA=",
@@ -41,7 +41,6 @@
 	],
 	"rootPath": "igcinfo/",
 	"heroku": {
-		"install" : [ "./..." ],
-		"goVersion": "go1.10.4"
+		"install" : [ "./..." ]
 	}
 }
