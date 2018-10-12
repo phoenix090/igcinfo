@@ -2,72 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="508bf561-618d-4dae-9bb3-be07191bcb4e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/r1/doc.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/r1/interval.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/r2/doc.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/r2/rect.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/r3/doc.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/r3/precisevector.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/r3/vector.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s1/angle.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s1/chordangle.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s1/doc.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s1/interval.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/bits_go18.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/bits_go19.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/cap.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/cell.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/cellid.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/cellunion.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/centroids.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/contains_point_query.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/contains_vertex_query.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/convex_hull_query.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/crossing_edge_query.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/doc.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/edge_clipping.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/edge_crosser.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/edge_crossings.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/edge_distances.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/encode.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/interleave.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/latlng.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/loop.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/matrix3x3.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/metric.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/nthderivative.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/paddedcell.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/point.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/point_measures.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/point_vector.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/pointcompression.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/polygon.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/polyline.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/polyline_measures.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/predicates.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/projections.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/rect.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/rect_bounder.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/region.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/regioncoverer.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/shape.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/shapeindex.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/shapeutil.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/stuv.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/util.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/golang/geo/s2/wedge_relations.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/marni/goigc/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/marni/goigc/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/marni/goigc/bruteforce.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/marni/goigc/doc.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/marni/goigc/go.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/marni/goigc/go.sum" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/marni/goigc/optimize.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/marni/goigc/parse.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/marni/goigc/point.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/marni/goigc/track.go" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/vendor.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/vendor.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -102,13 +36,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="go" value="4437" />
-          <entry key="json" value="32" />
+          <entry key="json" value="36" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Go" value="4437" />
-          <entry key="JSON" value="32" />
+          <entry key="JSON" value="36" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.go.postfix.template.usages.trigger">
@@ -156,8 +90,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vendor/vendor.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="39" column="9" selection-start-line="39" selection-start-column="9" selection-end-line="39" selection-end-column="9" />
+            <state relative-caret-position="420">
+              <caret line="43" column="21" lean-forward="true" selection-start-line="43" selection-start-column="21" selection-end-line="43" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -330,8 +264,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/vendor.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="39" column="9" selection-start-line="39" selection-start-column="9" selection-end-line="39" selection-end-column="9" />
+        <state relative-caret-position="420">
+          <caret line="43" column="21" lean-forward="true" selection-start-line="43" selection-start-column="21" selection-end-line="43" selection-end-column="24" />
         </state>
       </provider>
     </entry>
