@@ -20,7 +20,6 @@ type Information struct {
 }
 
 type Track struct {
-	ID          int
 	HDate       time.Time
 	Pilot       string
 	Glider      string

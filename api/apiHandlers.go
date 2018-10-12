@@ -2,10 +2,9 @@ package api
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"github.com/marni/goigc"
-	"github.com/phoenix090/igcinfo/model"
+	"igcinfo/model"
 	"net/http"
 	"regexp"
 	"strconv"
@@ -16,7 +15,7 @@ import (
 /*   Global vars   */
 var Id = 1
 var AllIds []model.TrackId
-var AllTracks []model.Track
+var AllTracks map[int]model.Track
 var Start time.Time
 
 /*
@@ -67,13 +66,17 @@ func RegAndShowTrackIds(w http.ResponseWriter, r *http.Request) {
 			for i := 0; i < len(track.Points)-1; i++ {
 				trackLen += track.Points[i].Distance(track.Points[i+1])
 			}
-			AllTracks = append(AllTracks, model.Track{
-				ID: Id, HDate: track.Date,
-				Pilot: track.Pilot, Glider: track.GliderType,
-				GliderId: track.GliderID, TrackLength: trackLen,
-			})
+
+			if AllTracks == nil {
+				AllTracks = make(map[int]model.Track)
+			}
 			newTrack := model.TrackId{Id: Id}
 			AllIds = append(AllIds, newTrack)
+			AllTracks[Id] = model.Track{
+				HDate: track.Date,
+				Pilot: track.Pilot, Glider: track.GliderType,
+				GliderId: track.GliderID, TrackLength: trackLen,
+			}
 			Id++
 			json.NewEncoder(w).Encode(newTrack)
 		}
@@ -110,13 +113,13 @@ func ShowTrackInfo(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if r.Method == "GET" {
-		track, err := GetTrackById(id)
+		track, err := FindTrack(id)
 		if err == nil && field == "" {
 			json.NewEncoder(w).Encode(track)
 		} else if err == nil && field != "" {
 			ShowTrackField(w, r, track, field)
 		} else {
-			http.Error(w, "Did't find the track with id ("+path[3]+")", 404)
+			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
 		}
 	} else {
 		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
@@ -145,12 +148,15 @@ func ShowTrackField(w http.ResponseWriter, r *http.Request, obj model.Track, fie
 	}
 }
 
-// Returns a struct of Track that matches the param id.
-func GetTrackById(id int) (T model.Track, err error) {
-	for _, T = range AllTracks {
-		if id == T.ID {
-			return T, nil
+/*
+Find a track by its id
+ */
+
+ func FindTrack(id int) (t model.Track, err error) {
+ 	for idx, t := range AllTracks {
+ 		if id == idx {
+ 			return t, nil
 		}
 	}
-	return T, errors.New("no track found")
-}
+ 	return t, fmt.Errorf("did't find track")
+ }
