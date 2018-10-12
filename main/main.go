@@ -16,7 +16,7 @@ func main() {
 		port = "8080"
 	}
 
-	http.HandleFunc("/api", api.Index)
+	http.HandleFunc("/api/", api.Index)
 	http.HandleFunc("/api/igc", api.RegAndShowTrackIds)
 	http.HandleFunc("/api/igc/", api.ShowTrackInfo)
 	err := http.ListenAndServe(":"+port, nil)
