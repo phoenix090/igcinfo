@@ -36,13 +36,22 @@ func GetUptime(t time.Time) (uptime string) {
 	newTime := now.Sub(t)
 	hours := int(newTime.Hours())
 	sek := strconv.Itoa(int(newTime.Seconds()) % 36000 % 60)
-	min := strconv.Itoa(int(newTime.Minutes()) % 60)
-	y, m, d := "0", "0", "0"
+	var min, hour, y, m, d string
+
+	// checking and setting when min gets to 1 or more
+	if int(newTime.Seconds())%36000 >= 60 {
+		min = strconv.Itoa(int(newTime.Minutes()) % 60)
+	}
+
+	// checking and setting when hour gets to 1 or more
+	if hours >= 1 {
+		hour = strconv.Itoa(hours)
+	}
 
 	// Setting the days correct
 	if hours > 23 {
 		d = strconv.Itoa(hours / 24)
-		hours %= 24
+		hour = strconv.Itoa(hours % 24)
 	}
 	days, _ := strconv.Atoi(d)
 	// Setting the month correct
@@ -58,7 +67,6 @@ func GetUptime(t time.Time) (uptime string) {
 		m = strconv.Itoa(months % 12)
 	}
 
-	hour := strconv.Itoa(hours)
 	uptime = "P" + y + "Y" + m + "M" + d + "DT" + hour + "H" + min + "M" + sek + "S"
 
 	return uptime

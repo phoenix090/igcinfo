@@ -4,9 +4,12 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"igcinfo/model"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"time"
+	"igcinfo/api"
 )
 
 /*
@@ -20,10 +23,10 @@ func TestIndexAPI(t *testing.T) {
 		url           string
 		expStatusCode int
 	}{
-		{method: "GET", url: "https://igcinfoapi.herokuapp.com/api/", expStatusCode: http.StatusOK},
+		{method: "GET", url: "https://igcinfoapi.herokuapp.com/api", expStatusCode: http.StatusOK},
 		{method: "GET", url: "https://igcinfoapi.herokuapp.com", expStatusCode: http.StatusNotFound},
 		{method: "GET", url: "https://igcinfoapi.herokuapp.com/apii", expStatusCode: http.StatusNotFound},
-		{method: "POST", url: "https://igcinfoapi.herokuapp.com/api/", expStatusCode: http.StatusMethodNotAllowed},
+		{method: "POST", url: "https://igcinfoapi.herokuapp.com/api/", expStatusCode: http.StatusNotFound},
 	}
 
 	for idx, testCase := range TestTable {
@@ -34,7 +37,7 @@ func TestIndexAPI(t *testing.T) {
 		}
 
 		writer := httptest.NewRecorder()
-		Index(writer, req)
+		api.Index(writer, req)
 
 		response := writer.Result()
 
@@ -69,7 +72,7 @@ func TestShowTrackInfo(t *testing.T) {
 		}
 
 		writer := httptest.NewRecorder()
-		Index(writer, req)
+		api.Index(writer, req)
 
 		response := writer.Result()
 
@@ -103,7 +106,7 @@ func TestRegAndShowTrackIds(t *testing.T) {
 			}
 
 			writer := httptest.NewRecorder()
-			RegAndShowTrackIds(writer, req)
+			api.RegAndShowTrackIds(writer, req)
 
 			response := writer.Result()
 
@@ -119,9 +122,8 @@ func TestRegAndShowTrackIds(t *testing.T) {
 			b, err := json.Marshal(&testCase.body)
 			buf := bytes.NewBuffer(b)
 
-			//os.Stdout.Write(b)
 			if err != nil {
-				fmt.Errorf("Error marshalling json, err: %v", err)
+				t.Errorf("Error marshalling json, err: %v", err)
 			}
 
 			req, err := http.NewRequest(testCase.method, testCase.url, buf)
@@ -130,7 +132,7 @@ func TestRegAndShowTrackIds(t *testing.T) {
 			}
 
 			writer := httptest.NewRecorder()
-			RegAndShowTrackIds(writer, req)
+			api.RegAndShowTrackIds(writer, req)
 
 			response := writer.Result()
 
@@ -141,10 +143,20 @@ func TestRegAndShowTrackIds(t *testing.T) {
 	}
 }
 
+/*
+Testing GetUptime
+*/
+func TestGetUptime(t *testing.T) {
+	startTimes := make(map[int]time.Time)
+	startTimes[1] = time.Date(2018, 9, 30, 12, 30, 40, 2, time.UTC)
+	startTimes[2] = time.Date(2018, 10, 12, 9, 0, 40, 2, time.UTC)
+	startTimes[3] = time.Date(2018, 10, 10, 17, 1, 2, 0, time.UTC)
+	startTimes[4] = time.Date(2017, 9, 0, 0, 50, 12, 0, time.UTC)
 
+	// Outputting so i can verify that the time format is correct
+	for idx, times := range startTimes {
+		res := model.GetUptime(times)
+		fmt.Println(idx, res)
+	}
 
-
-
-
-
-
+}
