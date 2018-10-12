@@ -24,7 +24,7 @@ var Start time.Time
  */
 func Index(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	reg := regexp.MustCompile("^/(api)$")
+	reg := regexp.MustCompile("^/(api/)$")
 	parts := reg.FindStringSubmatch(r.URL.Path)
 
 	uptime := model.GetUptime(Start)
