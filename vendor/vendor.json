@@ -1,6 +1,6 @@
 {
 	"comment": "",
-	"ignore": "igcinfo/main_test",
+	"ignore": "test",
 	"package": [
 		{
 			"checksumSHA1": "EFaoU18lhtrjqhlADkSjJkUAWIA=",
