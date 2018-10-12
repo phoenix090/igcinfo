@@ -1,6 +1,6 @@
 {
 	"comment": "",
-	"ignore": "test",
+	"ignore": "main_test.go",
 	"package": [
 		{
 			"checksumSHA1": "EFaoU18lhtrjqhlADkSjJkUAWIA=",
@@ -39,5 +39,5 @@
 			"revisionTime": "2018-09-09T23:15:54Z"
 		}
 	],
-	"rootPath": "igcinfo"
+	"rootPath": "igcinfo/main/"
 }
