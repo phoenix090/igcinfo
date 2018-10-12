@@ -1,5 +1,10 @@
 {
 	"comment": "",
+	"heroku": {
+		"install": [
+			"./..."
+		]
+	},
 	"ignore": "test",
 	"package": [
 		{
@@ -39,8 +44,5 @@
 			"revisionTime": "2018-09-09T23:15:54Z"
 		}
 	],
-	"rootPath": "igcinfo/",
-	"heroku": {
-		"install" : [ "./..." ]
-	}
+	"rootPath": "igcinfo"
 }
