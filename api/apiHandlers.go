@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/marni/goigc"
-	"igcinfo/model"
+	"github.com/phoenix090/igcinfo/model"
 	"net/http"
 	"regexp"
 	"strconv"

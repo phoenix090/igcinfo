@@ -1,7 +1,7 @@
 package main
 
 import (
-	"igcinfo/api"
+	"github.com/phoenix090/igcinfo/api"
 	"log"
 	"net/http"
 	"os"
