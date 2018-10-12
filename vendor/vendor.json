@@ -39,9 +39,9 @@
 			"revisionTime": "2018-09-09T23:15:54Z"
 		}
 	],
-	"rootPath": "igcinfo/main/",
+	"rootPath": "igcinfo/",
 	"heroku": {
-	"install" : [ "./..." ],
-	"goVersion": "go1.11.1"
+		"install" : [ "./..." ],
+		"goVersion": "go1.10.4"
 	}
 }
